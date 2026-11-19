@@ -42,7 +42,12 @@ print(df_name_seven)
 
 # STEP 3
 # Replace None with your code
-df_mass = None
+df_mass = pd.read_sql("""
+  SELECT name, mass
+  FROM planets
+  WHERE mass <= 1.00;
+  """, conn1)
+print(df_mass)
 
 # STEP 4
 # Replace None with your code
