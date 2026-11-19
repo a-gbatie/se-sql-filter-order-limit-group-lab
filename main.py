@@ -51,7 +51,13 @@ print(df_mass)
 
 # STEP 4
 # Replace None with your code
-df_mass_moon = None
+df_mass_moon = pd.read_sql("""
+  SELECT *
+  FROM planets
+  WHERE mass <= 1.00
+  AND num_of_moons > 0;
+  """, conn1)
+print(df_mass_moon)
 
 # STEP 5
 # Replace None with your code
