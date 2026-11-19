@@ -12,11 +12,31 @@ pd.read_sql("""SELECT * FROM planets; """, conn1)
 
 # STEP 1
 # Replace None with your code
-df_no_moons = None
+# pd.read_sql() -> Executes SQL query and returns dataframe
+# SELECT * -> Selects every column from table
+# FROM planets -> Specifies which table to query
+# WHERE moons = 0 -> Returns only planets with zero moons
+# conn1 -> Uses existing connection to planets.db
+# df_no_moons -> Stores query results in variable
+df_no_moons = pd.read_sql(""" 
+  SELECT * 
+  FROM planets
+  WHERE num_of_moons = 0;
+  """, conn1)
+print(df_no_moons)
 
 # STEP 2
 # Replace None with your code
-df_name_seven = None
+# SELECT name, mass -> Returns only the name and mass columns
+# FROM planets -> Retrieves data from planets table
+# LENGTH(name) -> Counts the characters in each planet's name
+# = 7 -> Keeps only names containing seven characters
+df_name_seven = pd.read_sql("""
+  SELECT name, mass
+  FROM planets
+  WHERE LENGTH(name) = 7;
+  """, conn1)
+print(df_name_seven)
 
 ##### Part 2: Advanced Filtering #####
 
