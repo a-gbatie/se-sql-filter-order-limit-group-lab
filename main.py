@@ -54,14 +54,19 @@ print(df_mass)
 df_mass_moon = pd.read_sql("""
   SELECT *
   FROM planets
-  WHERE mass <= 1.00
+  WHERE mass < 1.00
   AND num_of_moons > 0;
   """, conn1)
 print(df_mass_moon)
 
 # STEP 5
 # Replace None with your code
-df_blue = None
+df_blue = pd.read_sql("""
+  SELECT name, color
+  FROM planets
+  WHERE color LIKE '%blue%';
+  """, conn1)
+print(df_blue)
 
 ##### Part 3: Ordering and Limiting #####
 
