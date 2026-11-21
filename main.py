@@ -87,6 +87,10 @@ df_hungry = pd.read_sql("""
   WHERE hungry = 1
   ORDER BY age ASC;
   """, conn2)
+
+df_hungry = df_hungry.astype(object).where(
+  pd.notna(df_hungry), None
+)
 print(df_hungry)
 
 # STEP 7
@@ -103,18 +107,13 @@ df_hungry_ages = pd.read_sql("""
 # Replace None with your code
 # DESC -> sorts ages from oldest to youngest
 # LIMIT 4 -> selects only four records
-# Inner query selects four oldest dogs
-# Outer query sorts the selected four dogs alphabetically by breed
 df_4_oldest = pd.read_sql("""
   SELECT name, age, breed
-  FROM (
-    SELECT name, age, breed
-    FROM dogs
-    ORDER BY age DESC
-    LIMIT 4
-  )
-  ORDER BY breed ASC;
+  FROM dogs
+  ORDER BY age DESC
+  LIMIT 4;
   """, conn2)
+print(df_4_oldest.to_string(index=False))
 
 
 ##### Part 4: Aggregation #####
@@ -166,10 +165,10 @@ df_teams_years = pd.read_sql("""
 # HAVING -> filters groups based on calculations
 # WHERE -> filters individual rows, HAVING filters grouped results
 df_at_bats = pd.read_sql("""
-  SELECT team, AVG(AB) AS average_at_bats
+  SELECT team, AVG(at_bats) AS average_at_bats
   FROM babe_ruth_stats
   GROUP BY team
-  HAVING AVG(AB) > 200;
+  HAVING AVG(at_bats) > 200;
   """, conn3)
 
 
